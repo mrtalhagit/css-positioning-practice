@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PositionPlay - CSS Positioning</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #172b4d;
+        }
+
+        /* HEADER */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 22px 4%;
+            background-color: #edf5ff;
+            border-bottom: 1px solid #d8e4f3;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #1877f2;
+        }
+
+        nav {
+            display: flex;
+            gap: 28px;
+        }
+
+        nav a {
+            display: inline;
+            color: #344563;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #1877f2;
+        }
+
+        /* MAIN LAYOUT */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr 1.4fr;
+            gap: 25px;
+            padding: 35px 3%;
+            align-items: start;
+        }
+
+        /* LEFT COLUMN */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .info-box {
+            padding: 25px;
+            border-radius: 12px;
+            line-height: 1.8;
+        }
+
+        .info-box h3 {
+            margin-bottom: 8px;
+        }
+
+        .info-box p {
+            color: #355477;
+            font-size: 15px;
+        }
+
+        .info-box code,
+        .lesson code {
+            background-color: #d9eaff;
+            color: #075ac5;
+            padding: 3px 5px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .sticky-info {
+            background-color: #e0efff;
+        }
+
+        .relative-info {
+            background-color: #e0f6eb;
+        }
+
+        .absolute-info {
+            background-color: #eee8ff;
+        }
+
+        .fixed-info {
+            background-color: #ffe8ed;
+        }
+
+        /* CENTER COLUMN */
+        .center-column h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            color: #526783;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .center-column h2 {
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .lesson {
+            padding: 18px;
+            border-radius: 10px;
+            margin-bottom: 13px;
+            line-height: 1.7;
+        }
+
+        .lesson h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .lesson p {
+            color: #355477;
+            font-size: 14px;
+            margin-left: 12px;
+        }
+
+        .lesson-blue {
+            background-color: #e5f1ff;
+        }
+
+        .lesson-green {
+            background-color: #e5f7ee;
+        }
+
+        .lesson-purple {
+            background-color: #efebff;
+        }
+
+        .lesson-pink {
+            background-color: #ffedf0;
+        }
+
+        /* RIGHT COLUMN: POSITION DEMO */
+        .demo-area {
+            position: relative;
+            min-height: 660px;
+            padding: 22px;
+            border: 2px solid #dce6f2;
+            border-radius: 12px;
+            background-color: #f1f6fc;
+        }
+
+        .relative-box {
+            position: relative;
+            left: 0;
+            top: 0;
+            width: 95%;
+            height: 165px;
+            padding: 18px;
+            background-color: #dff6e9;
+            border: 2px solid #42c783;
+            border-radius: 8px;
+            color: #146c43;
+            z-index: 1;
+        }
+
+        .absolute-box {
+            position: absolute;
+            top: 75px;
+            right: 18px;
+            width: 58%;
+            min-height: 155px;
+            padding: 18px;
+            background-color: #e9e3ff;
+            border: 2px solid #8b68ff;
+            border-radius: 8px;
+            color: #5725c5;
+            z-index: 3;
+            box-shadow: 0 8px 20px #5140a022;
+        }
+
+        .absolute-box p,
+        .relative-box p {
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        .demo-content {
+            margin-top: 75px;
+            min-height: 295px;
+            padding: 22px;
+            background-color: #eaf1f9;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+
+        .demo-content p {
+            color: #526783;
+            margin-top: 12px;
+        }
+
+        /* STICKY EXAMPLE */
+        .sticky-box {
+            position: sticky;
+            top: 20px;
+            margin-left: auto;
+            width: 95px;
+            padding: 18px 10px;
+            text-align: center;
+            color: white;
+            background-color: #1877f2;
+            border-radius: 8px;
+            z-index: 5;
+            box-shadow: 0 5px 15px #1877f233;
+        }
+
+        /* FIXED EXAMPLE */
+        .fixed-box {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            padding: 18px 25px;
+            background-color: #ff4057;
+            color: white;
+            border-radius: 10px;
+            z-index: 200;
+            box-shadow: 0 5px 20px #ff405744;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 25px;
+            text-align: center;
+            color: white;
+            background-color: #203047;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo">▲ Position<span>Play</span></div>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#demo">Services</a>
+            <a href="#footer">Contact</a>
+        </nav>
+    </header>
+
+    <main class="main-layout" id="home">
+        <!-- LEFT COLUMN -->
+        <aside class="left-column">
+            <div class="info-box sticky-info">
+                <h3>Sticky Box</h3>
+                <p>
+                    This box uses <code>position: sticky;</code>
+                    It sticks near the top when you scroll.
+                </p>
+            </div>
+
+            <div class="info-box relative-info">
+                <h3>Relative Box</h3>
+                <p>
+                    This box uses <code>position: relative;</code>
+                    It can move from its normal position.
+                </p>
+            </div>
+
+            <div class="info-box absolute-info">
+                <h3>Absolute Box</h3>
+                <p>
+                    This box uses <code>position: absolute;</code>
+                    It is positioned inside a relative container.
+                </p>
+            </div>
+
+            <div class="info-box fixed-info">
+                <h3>Fixed Box</h3>
+                <p>
+                    This box uses <code>position: fixed;</code>
+                    It stays in the same place on the screen.
+                </p>
+            </div>
+        </aside>
+
+        <!-- CENTER COLUMN -->
+        <section class="center-column" id="about">
+            <h1>CSS Positioning Example</h1>
+
+            <p class="intro">
+                This page demonstrates different CSS positioning techniques along with
+                z-index using simple divs.
+            </p>
+
+            <h2>About This Page</h2>
+
+            <p class="intro">
+                Scroll down to see how each position property works. The colored boxes
+                explain the different types of positioning. The right side
+                demonstrates how z-index controls overlapping.
+            </p>
+
+            <div class="lesson lesson-blue">
+                <h3>◆ 1. Sticky Position</h3>
+                <p>
+                    Sticky elements remain in their normal position until they reach a
+                    specified scroll point.
+                </p>
+            </div>
+
+            <div class="lesson lesson-green">
+                <h3>◆ 2. Relative Position</h3>
+                <p>
+                    Relative positioning moves an element from its normal position
+                    without removing its space.
+                </p>
+            </div>
+
+            <div class="lesson lesson-purple">
+                <h3>◆ 3. Absolute Position</h3>
+                <p>
+                    Absolute positioning places an element relative to its nearest
+                    positioned ancestor.
+                </p>
+            </div>
+
+            <div class="lesson lesson-pink">
+                <h3>◆ 4. Fixed Position</h3>
+                <p>
+                    Fixed elements stay in the same place on the screen even when you
+                    scroll the page.
+                </p>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN -->
+        <section class="demo-area" id="demo">
+            <div class="relative-box">
+                <h3>Relative Container</h3>
+                <p>position: relative;</p>
+            </div>
+
+            <div class="absolute-box">
+                <h3>Absolute Box</h3>
+                <p>position: absolute;</p>
+                <p>z-index: 3;</p>
+            </div>
+
+            <div class="demo-content">
+                <h3>Some Content</h3>
+                <p>
+                    This area shows how elements can overlap. The z-index property
+                    controls which element appears in front when positioned elements
+                    overlap.
+                </p>
+                <p>
+                    Try changing the z-index values in the CSS to see how the
+                    overlapping boxes behave.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    
+
+    <!-- FIXED BOX -->
+    <div class="fixed-box">Fixed Box ↑</div>
+
+    <footer id="footer">© 2026 PositionPlay. All rights reserved.</footer>
+</body>
+
+</html>
